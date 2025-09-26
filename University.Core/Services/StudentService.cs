@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using University.Core.DTOs;
 using University.Core.Exceptions;
-using University.Core.Forms;
+using University.Core.Forms.StudentForms;
 using University.Core.Validations;
 using University.Data.Entities;
 using University.Data.Repositories;
@@ -19,7 +19,7 @@ namespace University.Core.Services
             _logger = logger;
         }
 
-        public void CreateStudent(CreateStudentForm form)
+        public void CreateStudent(CreateCourseForm form)
         {
             _logger.LogInformation("Creating a new student.");
             // Validation
@@ -47,8 +47,8 @@ namespace University.Core.Services
         public void DeleteStudent(int studentId)
         {
             _logger.LogInformation($"Deleting student with ID: {studentId}");
-            var srudent = _studentRepositories.GetById(studentId);
-            if (srudent == null)
+            var student = _studentRepositories.GetById(studentId);
+            if (student == null)
                 throw new KeyNotFoundException($"Student with ID {studentId} not found.");
             _studentRepositories.Delete(studentId);
             _studentRepositories.SaveChanges();
@@ -86,7 +86,7 @@ namespace University.Core.Services
 
         }
 
-        public void UpdateStudent(int studentId, UpdateStudentForm form)
+        public void UpdateStudent(int studentId, UpdateCourseForm form)
         {
             _logger.LogInformation($"Updating student with ID: {studentId}");
             var student = _studentRepositories.GetById(studentId);
@@ -115,8 +115,8 @@ namespace University.Core.Services
     {
         StudentDTO GetStudentById(int studentId);
         List<StudentDTO> GetAllStudents();
-        void CreateStudent(CreateStudentForm form);
-        void UpdateStudent(int studentId, UpdateStudentForm form);
+        void CreateStudent(CreateCourseForm form);
+        void UpdateStudent(int studentId, UpdateCourseForm form);
         void DeleteStudent(int studentId);
    
     }

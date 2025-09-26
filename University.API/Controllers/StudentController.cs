@@ -1,13 +1,15 @@
 ﻿using AutoWrapper.Wrappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using University.API.Filters;
 using University.Core.DTOs;
-using University.Core.Forms;
+using University.Core.Forms.StudentForms;
 using University.Core.Services;
 
 namespace University.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     [TypeFilter(typeof(ApiExceptionFilter))]
@@ -28,9 +30,11 @@ namespace University.API.Controllers
             var dto = _studentService.GetStudentById(id);
             return new ApiResponse(dto);
         }
+
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Teacher")]
         public ApiResponse GetAll()
         {
             var dto = _studentService.GetAllStudents();
@@ -41,14 +45,14 @@ namespace University.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ApiResponse Add([FromBody] CreateStudentForm form )
+        public ApiResponse Add([FromBody] CreateCourseForm form )
         {
             _studentService.CreateStudent(form);
             return new ApiResponse(HttpStatusCode.Created);
         }
 
         [HttpPut("{id}")]
-        public ApiResponse Update(int id, [FromBody] UpdateStudentForm form)
+        public ApiResponse Update(int id, [FromBody] UpdateCourseForm form)
         {
             _studentService.UpdateStudent(id, form);
             return new ApiResponse(HttpStatusCode.OK);
