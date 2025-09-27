@@ -34,7 +34,7 @@ namespace University.API.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Student")]
         public ApiResponse GetAll()
         {
             var dto = _studentService.GetAllStudents();
