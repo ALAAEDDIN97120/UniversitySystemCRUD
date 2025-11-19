@@ -4,7 +4,7 @@ using University.Data.Entities;
 
 namespace University.Data.Contexts.ClassMapping
 {
-    internal class StudentMapping : IEntityTypeConfiguration<Student>
+    public class StudentMapping : IEntityTypeConfiguration<Student>
     {
         public void Configure(EntityTypeBuilder<Student> builder)
         {

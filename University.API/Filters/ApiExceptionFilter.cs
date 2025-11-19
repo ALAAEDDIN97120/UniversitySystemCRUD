@@ -43,7 +43,7 @@ namespace University.API.Filters
             }
 
             _logger.LogError(context.Exception, context.Exception.Message);
-            context.Result = Response(context.Exception.Message, "Internal Server Error", StatusCodes.Status500InternalServerError, context.Exception.StackTrace);
+            context.Result = Response(context.Exception.Message, "Internal  Server Error", StatusCodes.Status500InternalServerError, context.Exception.StackTrace);
         }
 
         public ObjectResult Response(string message, string title, int status, string? stackTrace = null)

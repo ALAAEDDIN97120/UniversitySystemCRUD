@@ -5,16 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace University.Core.Forms
+namespace University.Core.Forms.StudentForms
 {
-    public class CreateStudentForm
+    public class UpdateCourseForm
     {
         [Required]
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+       
     }
 }
